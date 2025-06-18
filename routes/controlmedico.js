@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../models/db');
 const { isLoggedIn } = require('../seguridad/auth');
 
-// Listado general
+
 router.get('/', isLoggedIn, async (req, res) => {
   const [evaluaciones] = await db.query(`
     SELECT cm.*, i.id_paciente, p.nombre, p.apellido, m.nombre AS medico
@@ -16,7 +16,7 @@ router.get('/', isLoggedIn, async (req, res) => {
   res.render('controlmedico/lista', { evaluaciones });
 });
 
-// Formulario de nueva evaluación
+
 router.get('/nueva', isLoggedIn, async (req, res) => {
   const [internaciones] = await db.query(`
     SELECT i.id_internacion, p.nombre, p.apellido
@@ -28,7 +28,7 @@ router.get('/nueva', isLoggedIn, async (req, res) => {
   res.render('controlmedico/form', { internaciones, medicos });
 });
 
-// Guardar evaluación médica
+
 router.post('/nueva', isLoggedIn, async (req, res) => {
   const { id_internacion, id_medico, fecha, diagnostico, tratamiento, evolucion } = req.body;
 
@@ -48,7 +48,7 @@ router.post('/nueva', isLoggedIn, async (req, res) => {
   res.redirect('/controlmedico');
 });
 
-// Evaluaciones por paciente
+
 router.get('/paciente', isLoggedIn, async (req, res) => {
   const [pacientes] = await db.query('SELECT id_paciente, nombre, apellido FROM pacientes');
   res.render('controlmedico/buscar_paciente', { pacientes, evaluaciones: null });
@@ -68,7 +68,7 @@ router.post('/paciente', isLoggedIn, async (req, res) => {
   res.render('controlmedico/buscar_paciente', { pacientes, evaluaciones });
 });
 
-// Evaluaciones por fecha
+
 router.get('/fecha', isLoggedIn, (req, res) => {
   res.render('controlmedico/buscar_fecha', { evaluaciones: null });
 });

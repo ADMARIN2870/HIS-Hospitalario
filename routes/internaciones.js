@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../models/db');
 const { isLoggedIn } = require('../seguridad/auth');
 
-// Mostrar lista de internaciones
+
 router.get('/', async (req, res) => {
   const [internaciones] = await db.query(`
     SELECT 
@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
   res.render('internaciones/index', { internaciones });
 });
 
-// Formulario de nueva internación
+
 router.get('/nueva', async (req, res) => {
   const [pacientes] = await db.query('SELECT * FROM pacientes');
   const [camas] = await db.query(`
@@ -56,7 +56,6 @@ router.get('/nueva', async (req, res) => {
 });
 });
 
-// Guardar internación con validación de sexo
 router.post('/nueva', async (req, res) => {
   const { id_paciente, id_cama, id_habitacion, fecha_ingreso, id_medico, id_enfermero } = req.body;
 
@@ -118,7 +117,7 @@ router.post('/nueva', async (req, res) => {
   }
 });
 
-// Finalizar internación
+
 router.post('/finalizar/:id', async (req, res) => {
   const fecha = new Date().toISOString().split('T')[0];
   await db.query(
@@ -128,19 +127,18 @@ router.post('/finalizar/:id', async (req, res) => {
   res.redirect('/internaciones');
 });
 
-// Cancelar internación
+
 router.post('/cancelar/:id', async (req, res) => {
   await db.query('UPDATE internaciones SET estado = "cancelada" WHERE id_internacion = ?', [req.params.id]);
   res.redirect('/internaciones');
 });
 
-// Formulario búsqueda por paciente
+
 router.get('/buscar', isLoggedIn, async (req, res) => {
   const [pacientes] = await db.query('SELECT id_paciente, nombre, apellido FROM pacientes');
   res.render('internaciones/buscar', { pacientes, resultados: [] });
 });
 
-// Resultado búsqueda por paciente
 router.post('/buscar', isLoggedIn, async (req, res) => {
   const { id_paciente } = req.body;
   const [pacientes] = await db.query('SELECT id_paciente, nombre, apellido FROM pacientes');
