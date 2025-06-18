@@ -1,11 +1,12 @@
 const mysql = require('mysql2/promise');
 
-// Crear pool de conexiones a la base de datos
+
 const db = mysql.createPool({
-  host: 'localhost',           // o '127.0.0.1'
-  user: 'root',                // usuario por defecto en XAMPP
-  password: '',                // en XAMPP/MAMP suele ser cadena vacía
-  database: 'his_hospital',    // tu base de datos
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT || 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
