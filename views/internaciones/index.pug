@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+  h2 Lista de Internaciones
+
+  div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+    button.btn(style="margin-right: 10px;") Editar
+    button.btn(style="margin-right: 10px;") Eliminar
+
+  form#eliminarForm(action="/internaciones/eliminar-multiple", method="POST")
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID
+          th Paciente
+          th Cama
+          th Fecha Ingreso
+          th Fecha Alta
+          th Motivo
+          th Estado
+          th Médico
+          th Enfermero
+      tbody
+        each internacion in internaciones
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=internacion.id_internacion)
+            td= internacion.id_internacion
+            td= internacion.paciente_nombre || '---'
+            td= internacion.cama_numero || '---'
+            td= new Date(internacion.fecha_ingreso).toLocaleDateString('es-AR')
+            td= internacion.fecha_alta ? new Date(internacion.fecha_alta).toLocaleDateString('es-AR') : '---'
+            td= internacion.motivo || '---'
+            td= internacion.estado
+            td= internacion.medico_nombre ? `${internacion.medico_nombre} ${internacion.medico_apellido}` : '---'
+            td= internacion.enfermero_nombre ? `${internacion.enfermero_nombre} ${internacion.enfermero_apellido}` : '---'
+            
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }

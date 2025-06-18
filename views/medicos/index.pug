@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  h2 Lista de Médicos
+
+  div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+    button.btn(style="margin-right: 10px;") Editar
+    button.btn(style="margin-right: 10px;") Eliminar
+
+  form#eliminarForm(action="/medicos/eliminar-multiple", method="POST")
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID
+          th Nombre
+          th Apellido
+          th Especialidad
+          th Matrícula
+      tbody
+        each medico in medicos
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=medico.id_medico)
+            td= medico.id_medico
+            td
+              a(href=`/medicos/editar/${medico.id_medico}`) #{medico.nombre}
+            td= medico.apellido
+            td= medico.especialidad
+            td= medico.matricula
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }

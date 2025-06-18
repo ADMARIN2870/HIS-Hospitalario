@@ -1,0 +1,122 @@
+extends layout
+
+block content
+  .d-flex
+    // Menú lateral reutilizado desde layout
+    .wrapper
+      if session && session.user
+        aside.sidebar
+          h2 Sistema de Gestión
+          nav
+            details.submenu-pacientes
+              summary
+                i.fas.fa-users
+                |  Pacientes
+              ul
+                li: a(href="/pacientes/nuevo") Nuevo Paciente
+                li: a(href="/pacientes") Lista de pacientes
+
+            details.submenu-internaciones
+              summary
+                i.fas.fa-bed
+                | Internaciones
+              ul
+                li: a(href="/internaciones/nueva") Nueva internación
+                li: a(href="/internaciones") Lista de internaciones
+                li: a(href="/internaciones/buscar") Buscar por paciente
+
+            details.submenu-medicos
+              summary
+                i.fas.fa-user-md
+                | Médicos
+              ul
+                li: a(href="/medicos/nuevo") Nuevo Médico
+                li: a(href="/medicos") Lista de médicos
+                li: a(href="/medicos/especialidades") Especialidades
+
+            details.submenu-enfermeros
+              summary
+                i.fas.fa-user-nurse
+                | Enfermeros
+              ul
+                li: a(href="/enfermeros/nuevo") Nuevo enfermero
+                li: a(href="/enfermeros") Lista de enfermeros
+                li: a(href="/enfermeros/turnos") Turnos asignados
+
+            details.submenu-camas
+              summary
+                i.fas.fa-procedures
+                | Camas
+              ul
+                li: a(href="/camas/nueva") Nueva cama
+                li: a(href="/camas") Lista de camas
+                li: a(href="/camas/ocupadas") Camas ocupadas
+                li: a(href="/camas/limpieza") Camas en limpieza
+
+            details.submenu-habitaciones
+              summary
+                i.fas.fa-hospital
+                | Habitaciones
+              ul
+                li: a(href="/habitaciones/nueva") Nueva Habitacion
+                li: a(href="/habitaciones") Lista de habitaciones
+                li: a(href="/habitaciones/capacidad") Capacidad por ala
+
+            details.submenu-evaluaciones
+              summary
+                i.fas.fa-user-nurse
+                | Enfermería
+              ul
+                li: a(href="/evaluaciones/nueva") Nueva Evaluacion
+                li: a(href="/evaluaciones") Listar evaluaciones
+                li: a(href="/evaluaciones/paciente") Por paciente
+                li: a(href="/evaluaciones/fecha") Por fecha
+
+            details.submenu-controlmedico
+              summary
+                i.fas.fa-heartbeat
+                | Evaluaciones Médicas
+              ul
+                li: a(href="/controlmedico/nueva") Nueva Evaluación
+                li: a(href="/controlmedico") Listar evaluaciones
+                li: a(href="/controlmedico/paciente") Por paciente
+                li: a(href="/controlmedico/fecha") Por fecha
+
+            details.submenu-usuarios
+              summary
+                i.fas.fa-user-cog
+                | Usuarios
+              ul
+                li: a(href="/usuarios/nuevo") Nuevo usuario
+                li: a(href="/usuarios") Lista de usuarios
+
+            details
+              summary
+                i.fas.fa-sign-out-alt
+                | Cerrar sesión
+              ul
+                li: a(href="/login/logout") Logout
+
+    
+      // Carrusel
+      .carousel.slide#carrusel(data-bs-ride="carousel")
+        .carousel-inner
+          .carousel-item.active
+            img(src="/images/docu-sanitaria-1-edited.jpg", class="d-block w-100", alt="Imagen 1", style="object-fit: cover; height: 80vh;")
+          .carousel-item
+            img(src="/images/martha-dominguez-de-gouveia-nMyM7fxpokE-unsplash.jpg", class="d-block w-100", alt="Imagen 2", style="object-fit: cover; height: 80vh;")
+          .carousel-item
+            img(src="/images/hypertension-867855_1280.jpg", class="d-block w-100", alt="Imagen 3", style="object-fit: cover; height: 80vh;")
+          .carousel-item
+            img(src="/images/hospital-1802679_1920.jpg", class="d-block w-100", alt="Imagen 4", style="object-fit: cover; height: 80vh;")
+          .carousel-item
+            img(src="/images/operation-1807543_1280.jpg", class="d-block w-100", alt="Imagen 5", style="object-fit: cover; height: 80vh;")
+
+        button.carousel-control-prev(type="button", data-bs-target="#carrusel", data-bs-slide="prev")
+          span.carousel-control-prev-icon(aria-hidden="true")
+          span.visually-hidden Anterior
+        button.carousel-control-next(type="button", data-bs-target="#carrusel", data-bs-slide="next")
+          span.carousel-control-next-icon(aria-hidden="true")
+          span.visually-hidden Siguiente
+
+          

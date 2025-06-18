@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  h2 Lista de Evaluaciones de Enfermería
+
+  div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+    button.btn(style="margin-right: 10px;") Editar
+    button.btn(style="margin-right: 10px;") Eliminar
+
+  form#eliminarForm(action="/evaluaciones/eliminar-multiple", method="POST")
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID Evaluación
+          th ID Internación
+          th ID Usuario
+          th Fecha
+          th Presión Arterial
+          th Frecuencia Cardíaca
+          th Frecuencia Respiratoria
+          th Temperatura
+          th Síntomas
+          th Indicaciones
+          th Signos Vitales
+          th Observaciones
+      tbody
+        each eval in evaluaciones
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=eval.id_evaluacion)
+            td= eval.id_evaluacion
+            td
+              a(href=`/evaluaciones/editar/${eval.id_evaluacion}`) #{eval.id_internacion}
+            td= eval.id_usuario
+            td(style="white-space: nowrap; min-width: 100px")= eval.fecha ? new Date(eval.fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-'
+            td= eval.presion_arterial
+            td= eval.frecuencia_cardiaca
+            td= eval.frecuencia_respiratoria
+            td= eval.temperatura
+            td= eval.sintomas
+            td= eval.Indicaciones
+            td= eval.signos_vitales
+            td= eval.observaciones
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }

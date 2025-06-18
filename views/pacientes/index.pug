@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  h2 Lista de Pacientes
+
+  form#eliminarForm(action="/pacientes/eliminar-multiple", method="POST")
+    div(style="display: flex; gap: 10px; margin-bottom: 10px;")
+      button.btn(type="submit", formaction="/pacientes/editar-multiple") Editar
+      button.btn(type="submit", onclick="return confirm('¿Desea eliminar los pacientes seleccionados?')") Eliminar
+
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID
+          th Nombre
+          th Apellido
+          th DNI
+          th Fecha Nac.
+          th Sexo
+          th Dirección
+          th Teléfono
+          th Email
+          th Mutual
+          th Historial Médico
+      tbody
+        each paciente in pacientes
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=paciente.id_paciente)
+            td= paciente.id_paciente
+            td
+              a(href=`/pacientes/editar/${paciente.id_paciente}`) #{paciente.nombre}
+            td= paciente.apellido
+            td= paciente.dni
+            td= new Date(paciente.fecha_nacimiento).toLocaleDateString('es-AR')
+            td= paciente.sexo
+            td= paciente.direccion
+            td= paciente.telefono
+            td= paciente.email
+            td= paciente.Mutual
+            td= paciente.historial_medico || ''
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }

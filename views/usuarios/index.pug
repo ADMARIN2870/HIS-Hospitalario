@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  h2 Lista de Usuarios
+
+  div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+    button.btn(style="margin-right: 10px;") Editar
+    button.btn(style="margin-right: 10px;") Eliminar
+
+  form#eliminarForm(action="/usuarios/eliminar-multiple", method="POST")
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID
+          th Usuario
+          th Puesto
+      tbody
+        each usuario in usuarios
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=usuario.id_usuario)
+            td= usuario.id_usuario
+            td
+              a(href=`/usuarios/editar/${usuario.id_usuario}`) #{usuario.username}
+            td= usuario.Puesto
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }

@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+  h2= editar ? 'Editar Cama' : 'Nueva Cama'
+
+  form(action=editar ? `/camas/editar/${cama.id_cama}` : "/camas/nueva", method="POST")
+    div
+      label(for="id_habitacion") Habitación:
+      select(name="id_habitacion", id="id_habitacion", required)
+        each h in habitaciones
+          option(
+            value=h.id_habitacion,
+            selected=(cama.id_habitacion == h.id_habitacion)
+          ) Habitación #{h.numero} (#{h.ala})
+
+    div
+      label(for="estado") Estado:
+      select(name="estado", id="estado", required)
+        option(value="libre", selected=cama.estado === 'libre') Libre
+        option(value="ocupada", selected=cama.estado === 'ocupada') Ocupada
+        option(value="en_limpieza", selected=cama.estado === 'en_limpieza') En limpieza
+
+    div
+      label(for="sexo_paciente") Sexo del Paciente:
+      select(name="sexo_paciente", id="sexo_paciente", required)
+        option(value="M", selected=cama.sexo_paciente === 'M') Masculino
+        option(value="F", selected=cama.sexo_paciente === 'F') Femenino
+
+    div
+      label(for="ultima_limpieza") Última limpieza:
+      - var ultima = cama.ultima_limpieza ? cama.ultima_limpieza.toISOString().slice(0, 16) : ''
+      input(type="datetime-local", name="ultima_limpieza", id="ultima_limpieza", value=ultima)
+
+    div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+      button(type="submit") Guardar
+      button(href="/camas") Cancelar

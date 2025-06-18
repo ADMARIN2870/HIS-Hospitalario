@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  h2 📝 Nueva Evaluación de Enfermería
+
+  form(action="/evaluaciones/nueva", method="POST")
+    div
+      label(for="id_internacion") Internación
+      select(name="id_internacion", required)
+        option(value="") -- Seleccionar paciente internado --
+        each i in internaciones
+          option(value=i.id_internacion)= `${i.nombre} ${i.apellido}`
+
+    div
+      label(for="fecha") Fecha
+      input(type="date", name="fecha", required)
+
+    div
+      label(for="presion_arterial") Presión Arterial
+      input(type="text", name="presion_arterial", placeholder="Ej: 120/80")
+
+    div
+      label(for="frecuencia_cardiaca") Frecuencia Cardíaca (lat/min)
+      input(type="number", name="frecuencia_cardiaca", min="0")
+
+    div
+      label(for="frecuencia_respiratoria") Frecuencia Respiratoria (resp/min)
+      input(type="number", name="frecuencia_respiratoria", min="0")
+
+    div
+      label(for="temperatura") Temperatura (°C)
+      input(type="number", step="0.1", min="30", max="45", name="temperatura")
+
+    div
+      label(for="sintomas") Síntomas
+      textarea(name="sintomas", rows="3")
+
+    div
+      label(for="Indicaciones") Indicaciones
+      textarea(name="Indicaciones", rows="3")
+
+    div
+      label(for="signos_vitales") Signos Vitales
+      textarea(name="signos_vitales", rows="3")
+
+    div
+      label(for="observaciones") Observaciones
+      textarea(name="observaciones", rows="3")
+
+    
+    div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+      button(type="submit") Guardar
+      button(href="/evaluaciones") Cancelar

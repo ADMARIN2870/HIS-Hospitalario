@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  h2= editar ? 'Editar Paciente' : 'Nuevo Paciente'
+
+  form(action=editar ? `/pacientes/editar/${paciente.id_paciente}` : "/pacientes/nuevo", method="POST")
+    div
+      label(for="nombre") Nombre:
+      input#nombre(type="text", name="nombre", required, value=paciente.nombre || '')
+    
+    div
+      label(for="apellido") Apellido:
+      input#apellido(type="text", name="apellido", required, value=paciente.apellido || '')
+    
+    div
+      label(for="dni") DNI:
+      input#dni(type="text", name="dni", required, value=paciente.dni || '')
+    
+    div
+      label(for="fecha_nacimiento") Fecha de Nacimiento:
+      input#fecha_nacimiento(type="date", name="fecha_nacimiento", required, value=paciente.fecha_nacimiento || '')
+    
+    div
+      label(for="sexo") Sexo:
+      select#sexo(name="sexo", required)
+        option(value="M", selected=paciente.sexo === 'M') Masculino
+        option(value="F", selected=paciente.sexo === 'F') Femenino
+
+    div
+      label(for="direccion") Dirección:
+      input#direccion(type="text", name="direccion", value=paciente.direccion || '')
+    
+    div
+      label(for="telefono") Teléfono:
+      input#telefono(type="text", name="telefono", value=paciente.telefono || '')
+    
+    div
+      label(for="email") Email:
+      input#email(type="email", name="email", value=paciente.email || '')
+    
+    div
+      label(for="Mutual") Mutual:
+      input#Mutual(type="text", name="Mutual", value=paciente.Mutual || '')
+    
+    div
+      label(for="historial_medico") Historial Médico:
+      textarea#historial_medico(name="historial_medico") #{paciente.historial_medico || ''}
+
+    div(style="display: flex; gap: 10px; margin-top: 20px;")
+      button.btn(type="submit") Guardar
+      a.btn(href="/pacientes", style="text-decoration: none; display: inline-block; padding: 8px 16px;") Cancelar

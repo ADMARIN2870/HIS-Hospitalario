@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2 Turnos Asignados
+
+  table
+    thead
+      tr
+        th ID
+        th Enfermero
+        th Fecha
+        th Hora Inicio
+        th Hora Fin
+        th Descripción
+    tbody
+      each turno in turnos
+        tr
+          td= turno.id_turno
+          td= turno.nombre + ' ' + turno.apellido
+          td= new Date(turno.fecha).toLocaleDateString('es-AR')
+          td= turno.hora_inicio
+          td= turno.hora_fin
+          td= turno.descripcion

@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h2 Bienvenido #{user.username}
+  img(src="/images/docu-sanitaria-1-edited.jpg", alt="Imagen de bienvenida", style="max-width: 100%; height: auto; margin-top: 20px;")
+  br
+  a.btn(href="/pacientes", style="margin-top: 20px; display: inline-block;") Ir a lista de pacientes

@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  h2 🩺 Nueva Evaluación Médica
+
+  form(action="/controlmedico/nueva", method="POST")
+    div
+      label(for="id_internacion") Internación
+      select(name="id_internacion", required)
+        option(value="") -- Seleccionar paciente internado --
+        each i in internaciones
+          option(value=i.id_internacion)= i.nombre + ' ' + i.apellido
+
+    div
+      label(for="id_medico") Médico
+      select(name="id_medico", required)
+        option(value="") -- Seleccionar médico --
+        each m in medicos
+          option(value=m.id_medico)= m.nombre
+
+    div
+      label(for="fecha") Fecha
+      input(type="date", name="fecha", required)
+
+    div
+      label(for="diagnostico") Diagnóstico
+      textarea(name="diagnostico", rows="3", required)
+
+    div
+      label(for="tratamiento") Tratamiento
+      textarea(name="tratamiento", rows="3", required)
+
+    div
+      label(for="evolucion") Evolución
+      textarea(name="evolucion", rows="3")
+
+    div(style="display: flex; gap: 10px; margin-top: 15px;")
+      button(type="submit") Guardar
+      a(href="/controlmedico") Cancelar

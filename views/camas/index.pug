@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  h2 Lista de Camas
+
+  div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+    button.btn(style="margin-right: 10px;") Editar
+    button.btn(style="margin-right: 10px;") Eliminar
+
+  form#eliminarForm(action="/camas/eliminar-multiple", method="POST")
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID
+          th Número
+          th ID Habitación
+          th Estado
+          th Sexo Paciente
+          th Última Limpieza
+      tbody
+        each cama in camas
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=cama.id_cama)
+            td= cama.id_cama
+            td
+              a(href=`/camas/editar/${cama.id_cama}`) #{cama.numero}
+            td= cama.id_habitacion
+            td= cama.estado
+            td= cama.sexo_paciente
+            td= cama.ultima_limpieza ? new Date(cama.ultima_limpieza).toLocaleDateString('es-AR') : '-'
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }

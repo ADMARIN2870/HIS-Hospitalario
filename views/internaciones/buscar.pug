@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  h2 Buscar Internaciones por Paciente
+
+  form(action="/internaciones/buscar", method="POST", style="margin-bottom: 20px;")
+    label Seleccione un paciente:
+    select(name="id_paciente", required)
+      option(value="") -- Seleccione --
+      each p in pacientes
+        option(value=p.id_paciente)= p.nombre + ' ' + p.apellido
+    button(type="submit") Buscar
+
+  if resultados.length > 0
+    h3 Resultados:
+    table
+      thead
+        tr
+          th ID
+          th Fecha ingreso
+          th Fecha alta
+          th Cama
+          th Médico
+          th Enfermero
+          th Estado
+      tbody
+        each i in resultados
+          tr
+            td= i.id_internacion
+            td= new Date(i.fecha_ingreso).toLocaleDateString('es-AR')
+            td= i.fecha_alta ? new Date(i.fecha_alta).toLocaleDateString('es-AR') : '-'
+            td= i.cama_numero
+            td= i.medico_nombre ? i.medico_nombre + ' ' + i.medico_apellido : '-'
+            td= i.enfermero_nombre ? i.enfermero_nombre + ' ' + i.enfermero_apellido : '-'
+            td= i.estado
+  else if resultados
+    p No se encontraron internaciones para este paciente.

@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  h2 Lista de Pacientes
+  a(href="/pacientes/nuevo") + Nuevo Paciente
+  table
+    thead
+      tr
+        th ID
+        th Nombre
+        th Apellido
+        th DNI
+        th Fecha de Nacimiento
+        th Sexo
+        th Dirección
+        th Teléfono
+        th Email
+        th Mutual
+        th Historial Médico
+        th Acciones
+    tbody
+      each p in pacientes
+        tr
+          td= p.id_paciente
+          td= p.nombre
+          td= p.apellido
+          td= p.dni
+          td= p.fecha_nacimiento
+          td= p.sexo
+          td= p.direccion
+          td= p.telefono
+          td= p.email
+          td= p.mutual
+          td= p.historial_medico
+          td
+            a(href=`/pacientes/editar/${p.id_paciente}`) Editar
+            |  
+            form(action=`/pacientes/eliminar/${p.id_paciente}`, method="POST", style="display:inline")
+              button(type="submit", onclick="return confirm('¿Estás seguro?')") Eliminar

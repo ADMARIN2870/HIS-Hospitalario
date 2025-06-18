@@ -1,0 +1,391 @@
+/* 1. Fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* 2. Reset y fuente base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+/* 3. Layout principal */
+.wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.fondo-login {
+  background-image: url('/images/shutterstock_265289906-e1619591475727-1024x586.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.overlay {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+
+
+/* 4. Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #004080;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite scroll interno sin empujar contenido */
+  height: 100vh;     /* Altura completa del viewport */
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h2 {
+  font-size: 1.4em;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar .menu-group {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.sidebar a i {
+  margin-right: 12px;
+  font-size: 1.2em;
+  min-width: 24px;
+  text-align: center;
+}
+
+.sidebar a:hover {
+  background-color: #0059b3;
+}
+
+/* 5. Contenido principal */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* 6. Header */
+header {
+  background-color: #004080;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  width: 100%;
+  border-radius: 0;
+  margin-bottom: 20px;
+}
+
+
+
+header h1 {
+  font-size: 2em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+
+/* TABLAS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+thead {
+  background-color: #0059b3;
+  color: white;
+}
+
+thead tr {
+  border-bottom: 1px solid #ccc;
+}
+
+thead th {
+  padding: 12px 16px;
+  text-align: left;
+  border-right: 1px solid #ccc;
+  background-color: #0059b3;
+  color: white;
+  font-weight: bold;
+}
+
+thead th:last-child {
+  border-right: none;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ccc;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-right: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+tbody td:last-child {
+  border-right: none;
+}
+
+tr:hover {
+  background-color: #f8f8f8;
+}
+
+
+/* 8. Botones */
+button, .btn {
+  background-color: #004080;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+button:hover, .btn:hover {
+  background-color: #003366;
+}
+
+form {
+  margin-bottom: 20px; 
+}
+
+form[action="/login"] {
+  background-color: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-width: 600px;
+  }
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* 10. Navegación superior */
+nav.topnav {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding: 10px;
+  background-color: #e6e6e6;
+}
+
+nav.topnav a {
+  color: #004080;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav.topnav a:hover {
+  text-decoration: underline;
+}
+
+/* Los estilos existentes del sidebar permanecen igual */
+
+/* Ajusta la alineación del menú anidado */
+.sidebar ul ul {
+  padding-left: 2.2em; /* Alinea los subítems con el texto del ítem padre */
+  font-size: 0.9em;
+  margin: 0;
+}
+
+/* Estilo para los subítems */
+.sidebar ul ul li a {
+  font-size: 0.9em;
+  font-weight: normal;
+  padding: 6px 0;
+  display: block;
+  padding-left: 12px; /* 🔸 Sangría visual */
+}
+
+
+/* Oculta los íconos para los subítems */
+.sidebar ul ul li a i {
+  display: none; /* Elimina los íconos de los subítems */
+}
+
+/* Asegura que el efecto hover se aplique a los subítems */
+.sidebar ul ul li a:hover {
+  background-color: #0059b3; /* Coincide con el color hover del ítem padre */
+}
+
+/* Solo para subitems del menú Pacientes */
+details.submenu-pacientes ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+details.submenu-internaciones ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+details.submenu-evaluaciones ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+details.submenu-medicos ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+details.submenu-enfermeros ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+details.submenu-camas ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+details.submenu-habitaciones ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+details.submenu-usuarios ul li a {
+  padding-left: 3.5em;  /* controla la sangría */
+  font-size: 0.9em;
+}
+
+
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 100px;
+}
+
+body:has(form[action="/login"]) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.titulo-login {
+  margin-left: 20px; /* o el valor que necesites */
+}
+
+table {
+  table-layout: auto;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
+
+th, td {
+  white-space: nowrap;
+  padding: 8px 12px;
+}
+
+.botones-acciones {
+  display: flex;
+  gap: 20px; /* Espacio entre botones, ajusta según necesites (puede ser 10px, 15px, etc.) */
+  align-items: center; /* Alinea verticalmente los botones si tienen diferentes alturas */
+}
+
+.botones-acciones form {
+  margin: 0; /* Corrige el error de 'margin: 10' a 'margin: 0' o usa un valor con unidades como 'margin: 10px' si es necesario */
+}
+
+td {
+  white-space: normal; /* Permite salto de línea */
+  word-break: break-word; /* Corta palabras largas si es necesario */
+  max-width: 250px; /* Opcional: límite de ancho para evitar que se expanda toda la tabla */
+}
+
+
+details ul {
+  padding-left: 20px;
+}
+
+details ul li {
+  list-style: none;
+  margin: 5px 0;
+}
+

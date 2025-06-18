@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h2= editar ? 'Editar Habitación' : 'Nueva Habitación'
+
+  form(action=editar ? `/habitaciones/editar/${habitacion.id_habitacion}` : "/habitaciones/nueva", method="POST")
+    div
+      label Número:
+      input(type="text", name="numero", required, value=habitacion.numero || '')
+    div
+      label Ala:
+      input(type="text", name="ala", required, value=habitacion.ala || '')
+    div
+      label Capacidad:
+      input(type="number", name="capacidad", min="1", required, value=habitacion.capacidad || '')
+
+    div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+      button(type="submit") Guardar
+      button(href="/habitaciones") Cancelar

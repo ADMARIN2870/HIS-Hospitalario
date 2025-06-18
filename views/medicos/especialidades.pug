@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h2 Lista de Especialidades
+
+  table
+    thead
+      tr
+        th ID
+        th Nombre
+    tbody
+      each esp in especialidades
+        tr
+          td= esp.id_especialidad
+          td= esp.nombre

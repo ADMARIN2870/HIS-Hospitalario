@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  h2= editar ? 'Editar Usuario' : 'Nuevo Usuario'
+
+  form(action=editar ? `/usuarios/editar/${usuario.id_usuario}` : "/usuarios/nuevo", method="POST")
+    div
+      label Usuario:
+      input(type="text", name="username", required, value=usuario.username || '')
+    if !editar
+      div
+        label Contraseña:
+        input(type="password", name="password", required)
+    div
+      label Puesto:
+      select(name="Puesto", required)
+        option(value="admin", selected=usuario.Puesto === 'admin') Admin
+        option(value="recepcion", selected=usuario.Puesto === 'recepcion') Recepción
+        option(value="enfermeria", selected=usuario.Puesto === 'enfermeria') Enfermería
+        option(value="medico", selected=usuario.Puesto === 'medico') Médico
+        
+    div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+      button(type="submit") Guardar
+      button(href="/usuarios") Cancelar

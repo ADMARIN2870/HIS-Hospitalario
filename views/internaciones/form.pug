@@ -1,0 +1,72 @@
+extends ../layout
+
+block content
+  h2 Nueva Internación
+
+  if error
+    .alert.alert-danger= error
+
+  form(action="/internaciones/nueva", method="POST")
+    .form-group
+      label(for="id_paciente") Paciente:
+      select.form-control(name="id_paciente", required)
+        each paciente in pacientes
+          option(value=paciente.id_paciente selected=(internacion.id_paciente == paciente.id_paciente))= paciente.nombre + ' ' + paciente.apellido
+
+    .form-group
+      label(for="id_cama") Cama:
+      select.form-control(name="id_cama", required onchange="actualizarHabitacion(this)")
+        each cama in camas
+          option(
+            value=cama.id_cama
+            data-habitacion=cama.habitacion_numero
+            data-ala=cama.ala
+            selected=(internacion.id_cama == cama.id_cama)
+          ) 
+            | Cama ##{cama.numero}
+
+        .form-group
+      label(for="id_habitacion") Habitacion:
+      select.form-control(name="id_habitacion", required)
+        each h in habitaciones
+          option(value=h.id_habitacion)= 'Hab. ' + h.numero + ' - ' + h.ala
+
+    
+    
+    
+    .form-group
+      label(for="fecha_ingreso") Fecha de ingreso:
+      input.form-control(type="date", name="fecha_ingreso", required, value=internacion.fecha_ingreso || '')
+
+    .form-group
+      label(for="id_medico") Médico:
+      select.form-control(name="id_medico")
+        option(value="") Seleccione...
+        each m in medicos
+          option(value=m.id_medico selected=(internacion.id_medico == m.id_medico))= m.nombre + ' ' + m.apellido
+
+    .form-group
+      label(for="id_enfermero") Enfermero:
+      select.form-control(name="id_enfermero")
+        option(value="") Seleccione...
+        each e in enfermeros
+          option(value=e.id_enfermero selected=(internacion.id_enfermero == e.id_enfermero))= e.nombre + ' ' + e.apellido
+
+    .form-group.mt-3(style="display: flex; gap: 10px")
+      button.btn.btn-primary(type="submit") Guardar
+      a.btn.btn-secondary(href="/internaciones") Cancelar
+
+  script.
+    function actualizarHabitacion(select) {
+      const selectedOption = select.options[select.selectedIndex];
+      const habitacion = selectedOption.getAttribute('data-habitacion') || '';
+      const ala = selectedOption.getAttribute('data-ala') || '';
+      const habitacionInput = document.getElementById('habitacion');
+      habitacionInput.value = habitacion ? `Habitación ${habitacion} (${ala})` : '';
+    }
+
+    // Llamar al cargar si ya hay valor
+    document.addEventListener('DOMContentLoaded', function () {
+      const select = document.querySelector('select[name="id_cama"]');
+      if (select) actualizarHabitacion(select);
+    });

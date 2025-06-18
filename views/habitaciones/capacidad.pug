@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  h2 Capacidad por Ala
+
+  table
+    thead
+      tr
+        th Ala
+        th Total de Camas
+        th Capacidad Total
+    tbody
+      each fila in resultados
+        tr
+          td= fila.ala
+          td= fila.total_camas
+          td= fila.capacidad_total

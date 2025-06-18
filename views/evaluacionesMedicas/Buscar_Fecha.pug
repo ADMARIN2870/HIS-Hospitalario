@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+  h2 Buscar Evaluaciones Médicas por Fecha
+
+  form(method="POST")
+    label Fecha:
+    input(type="date", name="fecha", required)
+    button(type="submit") Buscar
+
+  if evaluaciones
+    h3 Evaluaciones para #{new Date(fecha).toLocaleDateString('es-AR')}
+    table
+      thead
+        tr
+          th Paciente
+          th Médico
+          th Fecha
+          th Diagnóstico
+          th Tratamiento
+          th Evolución
+      tbody
+        each e in evaluaciones
+          tr
+            td= e.nombre_paciente + ' ' + e.apellido_paciente
+            td= e.medico
+            td= new Date(e.fecha).toLocaleDateString('es-AR')
+            td= e.diagnostico
+            td= e.tratamiento
+            td= e.evolucion

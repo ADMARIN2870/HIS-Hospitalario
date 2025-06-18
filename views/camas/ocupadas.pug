@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2 Camas Ocupadas
+
+  table
+    thead
+      tr
+        th ID
+        th Número
+        th Habitación
+        th Ala
+        th Sexo Paciente
+        th Última Limpieza
+    tbody
+      each cama in camas
+        tr
+          td= cama.id_cama
+          td= cama.numero
+          td= cama.numero_habitacion
+          td= cama.ala
+          td= cama.sexo_paciente
+          td= cama.ultima_limpieza ? new Date(cama.ultima_limpieza).toLocaleDateString('es-AR') : '-'

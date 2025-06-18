@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  h2= editar ? 'Editar Médico' : 'Nuevo Médico'
+
+  form(action=editar ? `/medicos/editar/${medico.id_medico}` : "/medicos/nuevo", method="POST")
+    .form-group
+      label Nombre:
+      input.form-control(type="text", name="nombre", required, value=medico.nombre || '')
+
+    .form-group
+      label Apellido:
+      input.form-control(type="text", name="apellido", required, value=medico.apellido || '')
+
+    .form-group
+      label Especialidad:
+      select.form-control(name="id_especialidad", required)
+        option(value="") -- Seleccione una especialidad --
+        each e in especialidades
+          option(
+            value=e.id_especialidad,
+            selected=(medico.id_especialidad == e.id_especialidad)
+          )= e.nombre
+
+    .form-group
+      label Matrícula:
+      input.form-control(type="text", name="matricula", required, value=medico.matricula || '')
+
+    .form-group.mt-3(style="display: flex; gap: 10px")
+      button.btn.btn-primary(type="submit") Guardar
+      a.btn.btn-secondary(href="/medicos") Cancelar

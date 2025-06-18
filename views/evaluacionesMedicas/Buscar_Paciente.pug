@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  h2 🔍 Buscar Evaluaciones Médicas por Paciente
+
+  form(method="POST")
+    select(name="id_paciente", required)
+      option(value="") Seleccione un paciente
+      each p in pacientes
+        option(value=p.id_paciente)= p.nombre + ' ' + p.apellido
+    button(type="submit") Buscar
+
+  if evaluaciones
+    table
+      thead
+        tr
+          th Paciente
+          th Médico
+          th Fecha
+          th Diagnóstico
+          th Tratamiento
+          th Evolución
+      tbody
+        each e in evaluaciones
+          tr
+            td= e.nombre_paciente + ' ' + e.apellido_paciente
+            td= e.medico
+            td= new Date(e.fecha).toLocaleDateString('es-AR')
+            td= e.diagnostico
+            td= e.tratamiento
+            td= e.evolucion

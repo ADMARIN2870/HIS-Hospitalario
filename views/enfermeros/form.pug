@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h2= editar ? 'Editar Enfermero' : 'Nuevo Enfermero'
+
+  form(action=editar ? `/enfermeros/editar/${enfermero.id_enfermero}` : "/enfermeros/nuevo", method="POST")
+    div
+      label Nombre:
+      input(type="text", name="nombre", required, value=enfermero.nombre || '')
+    div
+      label Apellido:
+      input(type="text", name="apellido", required, value=enfermero.apellido || '')
+    div
+      label Turno:
+      input(type="text", name="turno", required, value=enfermero.turno || '')
+
+    div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+      button(type="submit") Guardar
+      button(href="/enfermeros") Cancelar

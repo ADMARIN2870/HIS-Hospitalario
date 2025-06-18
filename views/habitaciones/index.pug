@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  h2 Lista de Habitaciones
+
+  div(style="display: flex; gap: 10px; margin-bottom: 15px;")
+    button.btn(style="margin-right: 10px;") Editar
+    button.btn(style="margin-right: 10px;") Eliminar
+
+  form#eliminarForm(action="/habitaciones/eliminar-multiple", method="POST")
+    table
+      thead
+        tr
+          th
+            input(type="checkbox", onclick="toggleAll(this)")
+          th ID
+          th Número
+          th Ala
+          th Capacidad
+      tbody
+        each habitacion in habitaciones
+          tr
+            td
+              input(type="checkbox", name="seleccionados", value=habitacion.id_habitacion)
+            td= habitacion.id_habitacion
+            td
+              a(href=`/habitaciones/editar/${habitacion.id_habitacion}`) #{habitacion.numero}
+            td= habitacion.ala
+            td= habitacion.capacidad
+
+  script.
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByName('seleccionados');
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
